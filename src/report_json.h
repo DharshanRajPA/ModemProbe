@@ -26,9 +26,16 @@ struct ReportData {
   uint64_t anomaly_events_dropped = 0;
 
   uint64_t packets_total = 0;
+  uint64_t bytes_total = 0;
   double elapsed_seconds = 0.0;
   double pps = 0.0;
   double avg_parse_us = 0.0;
+
+  // Ring buffer and wireless/multimedia summaries to tie into console stats.
+  uint64_t ring_drops = 0;
+  uint64_t wifi_beacons = 0;
+  uint64_t lte_frames = 0;
+  uint64_t h264_nal_detections = 0;
 
   std::vector<RtpStreamSummary> rtp_streams;
 };

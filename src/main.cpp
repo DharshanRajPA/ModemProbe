@@ -190,10 +190,17 @@ static ReportData build_report(const Stats& s, double elapsed_s,
   rpt.anomaly_events_stored = a.events().size();
   rpt.anomaly_events_dropped = a.dropped_events();
   rpt.packets_total = s.packets;
+   rpt.bytes_total = s.bytes;
   rpt.elapsed_seconds = elapsed_s;
   rpt.pps = (elapsed_s > 0) ? static_cast<double>(s.packets) / elapsed_s : 0;
   rpt.avg_parse_us = (s.packets > 0)
       ? s.parse_time_us_sum / static_cast<double>(s.packets) : 0;
+
+  // Mirror console summaries so JSON and stdout tell the same story.
+  rpt.ring_drops = s.ring_drops;
+  rpt.wifi_beacons = s.wifi_beacons;
+  rpt.lte_frames = s.lte_frames;
+  rpt.h264_nal_detections = s.h264_nal_detections;
 
   for (const auto& kv : r.streams()) {
     const auto& st = kv.second;

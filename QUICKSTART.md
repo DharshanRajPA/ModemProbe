@@ -180,8 +180,15 @@ python3 -m json.tool report.json
 The report contains:
 - `protocol_counts` – Ethernet, IPv4, TCP, UDP, HTTP, DNS, RTP, SIP, H264_NAL, WiFi_Beacon, LTE_PDSCH, LTE_PUSCH
 - `anomalies` – sequence gaps, malformed headers, UDP length mismatches
-- `performance` – packets_total, elapsed_seconds, pps, avg_parse_us
+- `performance` – packets_total, bytes_total, elapsed_seconds, pps, avg_parse_us, ring_buffer_drops
 - `rtp_streams` – per-SSRC: received, lost, duplicates, out-of-order, H.264 detection
+- `wireless` – WiFi beacon and LTE frame counts
+- `multimedia` – H.264 NAL detection count
+
+On a normal modern laptop, the `pps` field reported in the console and JSON
+should comfortably exceed **1000 packets/second** for the `--demo` run or a
+small offline pcap replay, demonstrating the \"1000+ pps\" capability in the
+resume description (exact numbers depend on your hardware and OS load).
 
 ---
 

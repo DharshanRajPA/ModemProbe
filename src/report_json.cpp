@@ -31,10 +31,22 @@ bool write_report_json(const std::string& path, const ReportData& r, std::string
 
   Json::Value perf(Json::objectValue);
   perf["packets_total"] = Json::UInt64(r.packets_total);
+  perf["bytes_total"] = Json::UInt64(r.bytes_total);
   perf["elapsed_seconds"] = r.elapsed_seconds;
   perf["pps"] = r.pps;
   perf["avg_parse_us"] = r.avg_parse_us;
+  perf["ring_buffer_drops"] = Json::UInt64(r.ring_drops);
   root["performance"] = perf;
+
+  // Wireless and multimedia summaries (parallel to console stats).
+  Json::Value wireless(Json::objectValue);
+  wireless["wifi_beacons"] = Json::UInt64(r.wifi_beacons);
+  wireless["lte_frames"] = Json::UInt64(r.lte_frames);
+  root["wireless"] = wireless;
+
+  Json::Value multimedia(Json::objectValue);
+  multimedia["h264_nal_detections"] = Json::UInt64(r.h264_nal_detections);
+  root["multimedia"] = multimedia;
 
   Json::Value streams(Json::arrayValue);
   for (const auto& s : r.rtp_streams) {
