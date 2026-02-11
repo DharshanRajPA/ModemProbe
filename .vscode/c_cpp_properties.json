@@ -4,9 +4,11 @@
             "name": "Win32",
             "includePath": [
                 "${workspaceFolder}/src",
+                "${workspaceFolder}/stubs",
                 "${workspaceFolder}/**"
             ],
             "defines": [
+                "_WIN32",
                 "_DEBUG",
                 "UNICODE",
                 "_UNICODE"
@@ -19,7 +21,6 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/src",
-                "${workspaceFolder}/**",
                 "/usr/include",
                 "/usr/local/include"
             ],
